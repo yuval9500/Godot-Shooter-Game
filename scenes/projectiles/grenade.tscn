@@ -1,0 +1,265 @@
+[gd_scene load_steps=12 format=3 uid="uid://d2wmcglikvjnk"]
+
+[ext_resource type="Script" path="res://scenes/projectiles/grenade.gd" id="1_6jp0l"]
+[ext_resource type="Texture2D" uid="uid://b21x0mmuuq18y" path="res://graphics/projectiles/grenade.png" id="1_aamwu"]
+[ext_resource type="Texture2D" uid="uid://brj4jhyui1ba6" path="res://graphics/lights/textures/circle.png" id="3_33cdk"]
+[ext_resource type="Texture2D" uid="uid://k65ocj24cgwl" path="res://graphics/explosions/explosion_3.png" id="3_757by"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_000at"]
+friction = 10.0
+bounce = 0.4
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0n3s7"]
+radius = 98.3333
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3of07"]
+polygon = PackedVector2Array(-3, -8, -7, -6, -9, -1, -9, 2, -7, 6, -5, 8, -3, 9, 0, 9, 3, 9, 6, 7, 8, 5, 9, 3, 9, 1, 8, -3, 6, -6, 2, -8, -3, -8, -6, -29, 0, -30, 8, -28, 17, -24, 23, -18, 27, -13, 29, -7, 30, -1, 30, 8, 27, 15, 23, 21, 17, 25, 8, 29, -3, 29, -12, 27, -19, 23, -25, 17, -30, 6, -31, -3, -29, -11, -25, -18, -20, -23, -13, -27, -6, -29)
+
+[sub_resource type="Animation" id="Animation_eibpw"]
+resource_name = "Explosion"
+length = 2.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"explode"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RedBlink:enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.7, 0.9, 1.1, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true, false, true, false, true, false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_taigk"]
+resource_name = "Explosion"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Explosion:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1.94888e-05, 0.0500194, 0.100019, 0.15002, 0.20002, 0.250019, 0.300019, 0.350019, 0.40002, 0.45002, 0.500019, 0.52502, 0.550019, 0.57502, 0.600019, 0.625019, 0.65002, 0.675019, 0.70002, 0.750019, 0.800019),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LightOccluder2D:occluder_light_mask")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Explosion:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ExplosionLight:energy")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.9),
+"transitions": PackedFloat32Array(0.2, 1, 1),
+"update": 0,
+"values": [0.0, 6.0, 0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("RedBlink:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("CollisionShape2D:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_15ifx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Explosion:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LightOccluder2D:occluder_light_mask")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RedBlink:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a0wih"]
+_data = {
+"Blinking": SubResource("Animation_eibpw"),
+"Explosion": SubResource("Animation_taigk"),
+"RESET": SubResource("Animation_15ifx")
+}
+
+[node name="Grenade" type="RigidBody2D"]
+collision_layer = 8
+collision_mask = 15
+physics_material_override = SubResource("PhysicsMaterial_000at")
+gravity_scale = 0.0
+linear_damp = 1.6
+script = ExtResource("1_6jp0l")
+speed = 1200
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_0n3s7")
+metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("1_aamwu")
+metadata/_edit_lock_ = true
+
+[node name="RedBlink" type="PointLight2D" parent="."]
+color = Color(1, 0, 0, 1)
+energy = 10.0
+texture = ExtResource("3_33cdk")
+texture_scale = 0.05
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+scale = Vector2(1.6, 1.6)
+occluder = SubResource("OccluderPolygon2D_3of07")
+
+[node name="Explosion" type="Sprite2D" parent="."]
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("3_757by")
+hframes = 8
+vframes = 8
+
+[node name="ExplosionLight" type="PointLight2D" parent="."]
+color = Color(0.819608, 0.341176, 0, 1)
+energy = 0.0
+shadow_enabled = true
+texture = ExtResource("3_33cdk")
+texture_scale = 1.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Blinking"
+libraries = {
+"": SubResource("AnimationLibrary_a0wih")
+}
